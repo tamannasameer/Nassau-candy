@@ -196,6 +196,10 @@ def load_us_geojson():
         except Exception:
             continue
     return None
+
+
+@st.cache_data(show_spinner=False)
+def build_route_table(df: pd.DataFrame, delay_threshold: int) -> pd.DataFrame:
     df2 = df.copy()
     df2["Delayed"] = (df2["Lead Time"] > delay_threshold).astype(int)
 
